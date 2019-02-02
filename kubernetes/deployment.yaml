@@ -1,0 +1,38 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: counter
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: counter
+    spec:
+      tolerations:
+      - effect: NoSchedule
+        key: dedicated
+        operator: Equal
+        value: app
+      containers:
+      - name: counter
+        image: "kahootali/counter:latest"
+        volumeMounts:
+        - name: counter
+          mountPath: /app/
+      volumes:
+      - name: counter
+        persistentVolumeClaim:
+          claimName: counter
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: counter
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: default
