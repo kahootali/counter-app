@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: counter
+spec:
+  selector:
+    matchLabels:
+      app: counter
+  replicas: 1 
+  template:
+    metadata:
+      labels:
+        app: counter
+    spec:
+      tolerations:
+      - effect: NoSchedule
+        key: dedicated
+        operator: Equal
+        value: app
+      containers:
+      - name: counter
+        image: "kahootali/counter:latest"  
+        volumeMounts:
+        - name: counter
+          mountPath: /app/      
+  volumeClaimTemplates:
+  - metadata:
+      name: counter
+    spec:
+      accessModes: [ "ReadWriteMany" ]
+      storageClassName: efs
+      resources:
+        requests:
+          storage: 50Mi
