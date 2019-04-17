@@ -9,11 +9,6 @@ spec:
       labels:
         app: counter
     spec:
-      tolerations:
-      - effect: NoSchedule
-        key: dedicated
-        operator: Equal
-        value: app
       containers:
       - name: counter
         image: "kahootali/counter:latest"
@@ -34,5 +29,5 @@ spec:
   - ReadWriteMany
   resources:
     requests:
-      storage: 1Gi
-  storageClassName: default
+      storage: 50Mi
+  storageClassName: efs
