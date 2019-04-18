@@ -3,6 +3,7 @@ kind: StatefulSet
 metadata:
   name: counter
 spec:
+  serviceName: "counter-app"
   selector:
     matchLabels:
       app: counter
@@ -11,12 +12,7 @@ spec:
     metadata:
       labels:
         app: counter
-    spec:
-      tolerations:
-      - effect: NoSchedule
-        key: dedicated
-        operator: Equal
-        value: app
+    spec:      
       containers:
       - name: counter
         image: "kahootali/counter:1.0"  
