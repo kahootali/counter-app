@@ -19,7 +19,7 @@ spec:
         value: app
       containers:
       - name: counter
-        image: "kahootali/counter:latest"  
+        image: "kahootali/counter:1.0"  
         volumeMounts:
         - name: counter
           mountPath: /app/      
