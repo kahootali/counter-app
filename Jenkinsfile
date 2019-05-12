@@ -1,6 +1,7 @@
 pipeline {
   environment {
     registry = "kahootali/counter-app"
+    registryCredential = 'dockerhub'
     dockerImage = ''
   }
   agent any
@@ -20,7 +21,7 @@ pipeline {
     stage('Deploy Image') {
       steps{
          script {
-            docker.withRegistry( '' ) {
+            docker.withRegistry( '', registryCredential ) {
             dockerImage.push()
           }
         }
