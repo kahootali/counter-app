@@ -2,6 +2,8 @@
 
 Its a simple counter app which logs and increments the count from a file. Repository includes Dockerfile and respective kubernetes manifest.
 
+This repo is used in [Medium Blog: K8s Deployment vs Statefulset vs Daemonset](https://medium.com/stakater/k8s-deployments-vs-statefulsets-vs-daemonsets-60582f0c62d4).
+
 The image is already pushed at `docker.io/kahootali/counter`. You can use that or build and run the app yourself using the following commands.
 
 ## Build
