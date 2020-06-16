@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: counter-app
+spec:  
+  selector:
+    matchLabels:
+      app: counter
+  template:
+    metadata:
+      name: counter-app
+      labels:
+        app: counter
+    spec:
+      tolerations: 
+      - effect: NoSchedule
+        operator: Exists
+      containers:
+      - name: counter
+        image: "kahootali/counter:1.0"
+        volumeMounts:
+        - name: counter
+          mountPath: /app/
+      volumes:
+      - name: counter
+        persistentVolumeClaim:
+          claimName: counter-daemonset
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: counter-daemonset
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Mi
+  storageClassName: standard
