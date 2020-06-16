@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: counter
+spec:
+  serviceName: "counter-app"
+  selector:
+    matchLabels:
+      app: counter
+  replicas: 1 
+  template:
+    metadata:
+      labels:
+        app: counter
+    spec:      
+      containers:
+      - name: counter
+        image: "kahootali/counter:1.0"  
+        volumeMounts:
+        - name: counter-statefulset
+          mountPath: /app/      
+  volumeClaimTemplates:
+  - metadata:
+      name: counter-statefulset
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: standard
+      resources:
+        requests:
+          storage: 50Mi
