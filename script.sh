@@ -6,5 +6,6 @@ do
    cat counter.txt   
    var=$((var + 1))
    echo $var >counter.txt    
-   sleep 1s
+   sleepSeconds=$(echo $((1 + $RANDOM % 3)))
+   sleep $sleepSeconds
 done
