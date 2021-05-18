@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: dok-pod
+  name: persistence-pod
   labels:
-    app: dok-pod
+    app: persistence-pod
 spec:
   containers:
-    - name: dok-pod
+    - name: persistence-pod
       image: busybox
       args: [ /bin/sh,-c,'while true; do echo "The attendees are Awesome"; sleep 10s; done']
       resources:
