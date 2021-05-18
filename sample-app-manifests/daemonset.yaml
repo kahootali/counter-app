@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: dok-ds
+spec:  
+  selector:
+    matchLabels:
+      app: dok-ds
+  template:
+    metadata:
+      name: dok-ds
+      labels:
+        app: dok-ds
+    spec:
+      tolerations: 
+      - effect: NoSchedule
+        operator: Exists
+      containers:
+      - name: dok-ds
+        image: busybox
+        args: [ /bin/sh,-c,'while true; do echo "The attendees are awesome"; sleep 10s; done']

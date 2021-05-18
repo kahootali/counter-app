@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dok-deploy
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: dok-rs
+  template:
+    metadata:
+      labels:
+        app: dok-rs
+    spec:
+      containers:
+        - name: dok-rs
+          image: busybox
+          args: [ /bin/sh,-c,'while true; do echo "The attendees are awesome"; sleep 10s; done']
+          env:
+          - name: NAME
+            value: Ali Kahoot

@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dok-pod
+  labels:
+    app: dok-pod
+spec:
+  containers:
+    - name: dok-pod
+      image: busybox
+      args: [ /bin/sh,-c,'while true; do echo "The attendees are Awesome"; sleep 10s; done']
+      resources:
+        limits:
+          memory: 1Gi
+      env:
+      - name: NAME
+        value: Ali Kahoot
+      volumeMounts:
+        - name: dok
+          mountPath: /data/on/kubernetes
+  volumes:
+  - name: dok
+    persistentVolumeClaim:
+      claimName: dok
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: dok
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi

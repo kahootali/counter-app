@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dok-pod
+  labels:
+    app: dok-pod
+spec:
+  containers:
+    - name: dok-pod
+      image: busybox
+      args: [ /bin/sh,-c,'while true; do echo "The attendees are awesome"; sleep 10s; done']
+      resources:
+        limits:
+          memory: 1Gi
+      env:
+      - name: NAME
+        value: Ali Kahoot
